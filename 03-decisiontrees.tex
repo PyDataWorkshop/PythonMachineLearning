@@ -1,0 +1,67 @@
+\documentclass[MASTER.tex]{subfiles} 
+\begin{document} 
+
+%=======================================================================%
+\begin{frame}
+	\LARGE
+\textbf{Decision Trees}
+\begin{itemize}
+	\item  Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. \item The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	A decision tree is a simple representation for classifying examples. Decision tree learning is one of the most successful techniques for supervised classification learning[citation needed]. For this section, assume that all of the features have finite discrete domains, and there is a single target feature called the classification. Each element of the domain of the classification is called a class. 
+\end{frame}
+%=======================================================================%
+\begin{frame}
+	\LARGE
+	\textbf{Decision Trees}
+	\begin{itemize}
+		\item A decision tree or a classification tree is a tree in which each internal (non-leaf) node is labeled with an input feature. 
+		\item The arcs coming from a node labeled with a feature are labeled with each of the possible values of the feature.
+		\item Each leaf of the tree is labeled with a class or a probability distribution over the classes.
+
+\end{itemize}
+\end{frame}
+%=======================================================================%
+\begin{frame}
+	\LARGE
+\textbf{Decision Trees}
+\begin{itemize}
+\item For instance, in the example below, decision trees learn from data to approximate a sine curve with a set of \textit{If-Then-Else} decision rules. 
+\item The deeper the tree, the more complex the decision rules and the fitter the model.
+\end{itemize}
+
+\end{frame}
+%========================================================================= %
+\begin{frame}[fragile]
+	\LARGE
+\textbf{Decision Trees}\\
+
+Using the Iris dataset, we can construct a tree as follows:
+{
+\normalsize
+\begin{framed}
+\begin{verbatim}
+>>> from sklearn.datasets import load_iris
+>>> from sklearn import tree
+>>> iris = load_iris()
+>>> clf = tree.DecisionTreeClassifier()
+>>> clf = clf.fit(iris.data, iris.target)
+\end{verbatim}
+\end{framed}
+}
+\end{frame}
+%========================================================================= %
+
+\begin{frame}
+
+\begin{figure}
+\centering
+\includegraphics[width=1.1\linewidth]{SVMexplain}
+\end{figure}
+	
+\end{frame}
+
+\end{document}

@@ -1,0 +1,164 @@
+\documentclass[MASTER.tex]{subfiles} 
+\begin{document} 
+	
+
+\section{Probability Distributions}
+
+\begin{frame}
+	\frametitle{The Normal Distribution  - \texttt{normal}}
+	\large
+	\textbf{The main commands}
+	\begin{itemize}
+	\item \texttt{normal()} generates a set of random numbers from a standard Normal distribution.\item \texttt{normal(mu, sigma)} generates draws from
+	a Normal distribution with mean $\mu$ and standard deviation $\sigma$. \item \texttt{normal(mu, sigma, (10,10))} generates a 10 by 10 array
+	of draws from a Normal with mean $\mu$ and standard deviation $\sigma$. 
+	\item 
+	\texttt{normal(mu, sigma)} is equivalent to \texttt{mu + sigma $\ast$ \texttt{standard\_normal()}}.
+	\end{itemize}
+\end{frame}
+%===========================================================%
+\begin{frame}
+	\frametitle{The Poisson Distribution - \texttt{poisson}}
+	\begin{itemize}
+	\item \texttt{poisson()} generates a set of random numbers from a Poisson distribution with $\lambda = 1$.\item  \texttt{poisson(lambda)} generates a draw
+		from a Poisson distribution with expectation $\lambda$. 
+		\item poisson(lambda, (10,10)) generates a 10 by 10 array of
+		draws from a Poisson distribution with expectation $\lambda$.
+		
+	\end{itemize}
+
+\end{frame}
+%===========================================================%
+\begin{frame}
+	\frametitle{\texttt{standard\_t}}
+	\texttt{standard\_t(nu)} generates a set of random numbers from a Student’s t with shape parameter $\nu$.\\ \texttt{standard\_t(nu, (10,10))}
+	generates a 10 by 10 array of draws from a Student’s t with shape parameter $\nu$.
+\end{frame}
+%===========================================================%
+\begin{frame}
+	\frametitle{\texttt{uniform}}
+	\texttt{uniform()} generates a uniform random variable on (0, 1). \\ \texttt{uniform(low, high)} generates a uniform on
+	(l , h). \texttt{uniform(low, high, (10,10))} generates a 10 by 10 array of uniforms on (l , h).
+	
+\end{frame}
+%===========================================================%
+\begin{frame}
+	\frametitle{Continuous Random Variables}
+	
+	SciPy contains a large number of functions for working with continuous random variables. Each function
+	resides in its own class (e.g. norm for Normal or gamma for Gamma), and classes expose methods for random
+	number generation, computing the PDF, CDF and inverse CDF, fitting parameters using MLE, and
+	computing various moments. The methods are listed below, where dist is a generic placeholder for the
+	distribution name in SciPy. 
+\end{frame}
+%===========================================================%
+\begin{frame}
+	\begin{itemize} 
+		\item \texttt{dist.rvs}\\
+		Pseudo-randomnumbergeneration. Generically, rvs is called using dist.rvs(*args, loc=0, scale=1, size=size)
+		where size is an n-element tuple containing the size of the array to be generated.
+		\item \texttt{dist.pdf}\\
+		Probability density function evaluation for an array of data (element-by-element). Generically, pdf is
+		called using \texttt{dist.pdf(x, *args, loc=0, scale=1)} where x is an array that contains the values to use when
+		evaluating PDF.
+%		\item \texttt{dist.logpdf}\\
+%		Log probability density function evaluation for an array of data (element-by-element). Generically, logpdf
+%		is called using dist.logpdf(x, *args, loc=0, scale=1) where x is an array that contains the values to use
+%		when evaluating log PDF.
+	\end{itemize}
+\end{frame}
+%===========================================================%
+\begin{frame}
+	\begin{itemize}
+		\item \texttt{dist.cdf}\\
+		Cumulative distribution function evaluation for an array of data (element-by-element). Generically, cdf
+		is called using d\texttt{ist.cdf(x, *args, loc=0, scale=1)} where x is an array that contains the values to use
+		when evaluating CDF.
+		\item \texttt{dist.ppf}\\
+		Inverse CDF evaluation (also known as percent point function) for an array of values between 0 and 1.
+		Generically, ppf is called using \texttt{dist.ppf(p, *args, loc=0, scale=1)} where p is an array with all elements
+		between 0 and 1 that contains the values to use when evaluating inverse CDF.
+	\end{itemize}
+\end{frame}
+%===========================================================%
+\begin{frame}
+	\begin{itemize}
+		\item \texttt{dist.fit}\\
+		Estimate shape, location, and scale parameters from data by maximum likelihood using an array of data.
+		\\ Generically, fit is called using \texttt{dist.fit(data, *args, floc=0, fscale=1)} where data is a data array used
+		to estimate the parameters. \\ floc forces the location to a particular value (e.g. floc=0). \texttt{fscale} similarly
+		forces the scale to a particular value (e.g. \texttt{fscale=1}) .\\  It is necessary to use floc and/or fscale when
+		computing MLEs if the distribution does not have a location and/or scale.\\ For example, the gamma distribution
+		is defined using 2 parameters, often referred to as shape and scale. \\ In order to useMLto estimate
+		parameters from a gamma, floc=0 must be used.
+	\end{itemize}
+\end{frame}
+%===========================================================%
+\begin{frame}
+	\begin{itemize}
+		\item \texttt{dist.median}\\
+		Returns the median of the distribution. Generically, median is called using dist.median(*args, loc=0, scale=1).
+		\item \texttt{dist.mean}\\
+		Returns the mean of the distribution. Generically, mean is called using dist.mean(*args, loc=0, scale=1).
+		\item\texttt{ dist.moment}\\
+		nth non-centralmomentevaluation of the distribution. Generically, moment is called using dist.moment(r, *args,
+		loc=0, scale=1) where r is the order of the moment to compute.
+		\item \texttt{dist.var}\\
+		Returns the variance of the distribution. Generically, var is called using \texttt{dist.var(*args, loc=0, scale=1)}.
+		\item \texttt{dist.std}\\
+		Returns the standard deviation of the distribution. Generically, std is called using dist.std(*args, loc=0, scale=1).
+	\end{itemize}
+\end{frame}
+%===========================================================%
+\begin{frame}[fragile]
+	\frametitle{Example}
+	The gamma distribution is used as an example. \\ The gamma distribution takes 1 shape parameter a (a is
+	the only element of *args), which is set to 2 in all examples.
+	\begin{framed}
+		\begin{verbatim}
+			
+		>>> import scipy.stats as stats
+		>>> gamma = stats.gamma
+		
+		>>> gamma.mean(2), gamma.median(2)
+		>>> gamma.std(2), gamma.var(2)
+		(2.0, 1.6783469900166608, 1.4142135623730951, 2.0)
+		
+		>>> gamma.moment(2,2) gamma.
+		moment(1,2)**2 # Variance
+		\end{verbatim}
+	\end{framed}
+\end{frame}
+%===========================================================%
+\begin{frame}[fragile]	
+	\begin{framed}
+		\begin{verbatim}
+		>>> gamma.cdf(5, 2), gamma.pdf(5, 2)
+		(0.95957231800548726, 0.033689734995427337)
+		
+		>>> gamma.ppf(.95957231800548726, 2)
+		5.0000000000000018
+		
+		>>> log(gamma.pdf(5, 2)) gamma.
+		logpdf(5, 2)
+		0.0
+		\end{verbatim}
+	\end{framed}
+\end{frame}
+%===========================================================%
+\begin{frame}[fragile]	
+	\begin{framed}
+		\begin{verbatim}
+		>>> gamma.rvs(2, size=(2,2))
+		array([[ 1.83072394, 2.61422551],
+		       [ 1.31966169, 2.34600179]])
+		
+		>>> gamma.fit(gamma.rvs(2, size=(1000)), floc = 0) 
+		    # a, 0, shape
+		(2.209958533078413, 0, 0.89187262845460313)
+		\end{verbatim}
+	\end{framed}
+\end{frame}
+%==========================================================%
+\end{document}
+
