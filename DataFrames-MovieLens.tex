@@ -11,13 +11,13 @@
 \begin{document}
 \section{Working with DataFrames - by Greg Reda}
 
-\begin{itemize}
+ 
 \item Now that we can get data into a DataFrame, we can finally start working with them.
 % pandas has an abundance of functionality, far too much for me to cover in this introduction. I'd encourage anyone interested in %diving deeper into the library to check out its excellent documentation. Or just use Google - there are a lot of Stack Overflow %questions and blog posts covering specifics of the library.
 \item 
 We'll be using the MovieLens dataset in many examples going forward. The dataset contains 100,000 ratings made by 943 users on 1,682 movies.
 
-\end{itemize}
+ 
 %--------------------------------%
 \begin{framed}
 \begin{verbatim}
@@ -55,13 +55,13 @@ dtypes: float64(1), int64(1), object(3)
 \end{verbatim}
 The output tells a few things about our DataFrame.
 
-\begin{itemize}
+ 
 \item It is eveidently an instance of a DataFrame.
 \item Each row was assigned an index of 0 to N-1, where N is the number of rows in the DataFrame. pandas will do this by default if an index is not specified. Don't worry, this can be changed later.
 \item There are 1,682 rows (every row must have an index).
 \item  dataset has five total columns, one of which isn't populated at all (video\_release\_date) and two that are missing some values (\texttt{release\_date} and \texttt{imdb\_url}).
 \item The last line displays the datatypes of each column, but not necessarily in the corresponding order to the listed columns. You should use the dtypes method to get the datatype for each column.
-\end{itemize}
+ 
 
 \begin{verbatim}
 movies.dtypes
@@ -81,15 +81,15 @@ DataFrame's also have a describe method, which is great for seeing basic statist
 \begin{verbatim}
 users.describe()
 
-user_id	age
-count	 943.000000	 943.000000
-mean	 472.000000	 34.051962
-std	 272.364951	 12.192740
-min	 1.000000	 7.000000
-25%	 236.500000	 25.000000
-50%	 472.000000	 31.000000
-75%	 707.500000	 43.000000
-max	 943.000000	 73.000000
+user_id age
+count  943.000000  943.000000
+mean  472.000000  34.051962
+std  272.364951  12.192740
+min  1.000000  7.000000
+25%  236.500000  25.000000
+50%  472.000000  31.000000
+75%  707.500000  43.000000
+max  943.000000  73.000000
 \end{verbatim}
 Notice user\_id was included since it's numeric. Since this is an ID value, the stats for it don't really matter.
 
@@ -254,7 +254,7 @@ user_id
 \end{verbatim}
 \end{framed}
 \begin{framed}
-	\begin{verbatim}
+ \begin{verbatim}
    user_id  age sex  occupation zip_code
 0        1   24   M  technician    85711
 1        2   53   F       other    94043
@@ -428,7 +428,7 @@ print pd.merge(left_frame, right_frame, on='key', how='left')
 
 We keep everything from the left frame, pulling in the value from the right frame where the keys match up. The right_value is NULL where keys do not match (NaN).
 \begin{framed}
-	\begin{verbatim}
+ \begin{verbatim}
 SQL Equivalent:
 
 SELECT left_frame.key, left_frame.left_value, right_frame.right_value
@@ -496,17 +496,17 @@ pandas.concat takes a list of Series or DataFrames and returns a Series or DataF
 \begin{verbatim}
 pd.concat([left_frame, right_frame])
 Out[50]:
-key	left_value	right_value
-0	 0	 a	 NaN
-1	 1	 b	 NaN
-2	 2	 c	 NaN
-3	 3	 d	 NaN
-4	 4	 e	 NaN
-0	 2	 NaN	 f
-1	 3	 NaN	 g
-2	 4	 NaN	 h
-3	 5	 NaN	 i
-4	 6	 NaN	 j
+key left_value right_value
+0  0  a  NaN
+1  1  b  NaN
+2  2  c  NaN
+3  3  d  NaN
+4  4  e  NaN
+0  2  NaN  f
+1  3  NaN  g
+2  4  NaN  h
+3  5  NaN  i
+4  6  NaN  j
 \begin{verbatim}
 \end{framed}
 
@@ -520,12 +520,12 @@ Additionally, objects can be concatentated side-by-side using the function's axi
 \begin{verbatim}
 pd.concat([left_frame, right_frame], axis=1)
 Out[51]:
-key	left_value	key	right_value
-0	 0	 a	 2	 f
-1	 1	 b	 3	 g
-2	 2	 c	 4	 h
-3	 3	 d	 5	 i
-4	 4	 e	 6	 j
+key left_value key right_value
+0  0  a  2  f
+1  1  b  3  g
+2  2  c  4  h
+3  3  d  5  i
+4  4  e  6  j
 pandas.concat can be used in a variety of ways; however, I've typically only used it to combine Series/DataFrames into one unified object. The documentation has some examples on the ways it can be used.
 
 %-------------------------------------------%
